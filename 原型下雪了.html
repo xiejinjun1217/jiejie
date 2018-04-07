@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+			body{
+			background:black;
+			}
+		</style>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//随机函数
+		function suiji(min,max){
+			return parseInt(Math.random()*(max-min+1)+min);
+			
+		}
+		//构造函数
+		function xiaxue(){
+			this.x=suiji(0,innerWidth-40);//随机一个left值
+			this.y=suiji(0,innerHeight-40);//随机一个top值
+			
+		}
+		//y原型
+		xiaxue.prototype.fang=function(){
+			this.img=document.createElement("img");
+			this.img.src="img/snow1.png";
+			this.img.style.position='absolute';
+			this.img.style.left=this.x+"px";
+			this.img.style.top=this.y+"px";
+			document.body.appendChild(this.img);
+		}
+		//实例化
+		var i=0;
+		var timer=setInterval(function(){
+		var a=new xiaxue();
+		a.fang();
+		i++;
+		if(i>=500){
+			clearInterval(timer);
+		}
+		},100)
+	</script>
+</html>

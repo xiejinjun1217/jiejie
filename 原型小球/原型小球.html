@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background: green;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//随机函数
+			function ran(min,max){
+				return parseInt(Math.random()*(max-min+1)+min);
+				
+			}
+			//构造函数
+			function Gou(){
+				this.r=ran(1,100);
+				this.w=this.r;
+				this.h=this.r;
+				this.backgroundColor="rgb("+ran(0,255)+","+ran(0,255)+","+ran(0,255)+")";
+				
+				
+			}
+			//原型 属相 创造求 随机位置 随机颜色 随机大小 定位 圆角
+		Gou.prototype.show=function(){
+			this.ndiv=document.createElement("div");
+			this.ndiv.style.position="absolute";
+			this.ndiv.innerHTML="我是你爸爸";
+			
+			this.ndiv.style.left=ran(0,innerWidth-this.w)+"px";
+			this.ndiv.style.top=ran(0,innerHeight-this.h)+"px";
+			this.ndiv.style.width=this.w+"px";
+			this.ndiv.style.height=this.h+"px";
+			this.ndiv.style.borderRadius=this.width/2+"%";
+			this.ndiv.style.backgroundColor=this.backgroundColor;
+			document.body.appendChild(this.ndiv)
+			
+		}
+		//给构造函数添加一个原型属性ni 碰壁饭坛
+		
+		Gou.prototype.run=function(){
+			var o=this;
+			 var speedx=ran(1,5);
+			 var speedy=ran(1,5);
+			
+			setInterval(function(){
+			
+			 o.l=o.ndiv.offsetLeft;
+			
+			o.t=o.ndiv.offsetTop;
+			if(o.l<=0){
+				speedx*=-1
+			}else if(o.l>=innerWidth-o.w-speedx){
+				speedx*=-1
+			}
+			if(o.t<=0){
+				speedy*=-1
+			}else if(o.t>=innerHeight-o.h-speedy){
+				speedy*=-1
+			}
+			
+			o.l+=speedx;
+			o.t+=speedy;
+			o.ndiv.style.left=o.l+"px";
+			o.ndiv.style.top=o.t+"px";
+			},50)
+		}
+		
+		
+			//实例化
+			var item=0;
+			var id=setInterval( function(){
+				var p1=new Gou()
+			p1.show();
+			p1.run();
+			item++;
+			if(item>=50){
+				clearInterval(id)
+			}
+			},1000)
+			
+		</script>
+	</body>
+</html>
